@@ -1,0 +1,26 @@
+{
+	"author": "Sebastian Wiedenroth <wiedi@frubar.net>",
+	"bin": {
+		"mellorimond": "./server.js",
+		"mellorimon-cli": "./cli.js"
+	},
+	"dependencies": {
+		"carrier": "0.1.x",
+		"async": "0.2.x"
+	},
+	"description": "Minimal Munin Server for the SmartOS Global Zone",
+	"keywords": [
+		"munin",
+		"monitoring",
+		"smartos"
+	],
+	"licenses": [
+		{
+			"name": "BSD",
+			"url": "http://opensource.org/licenses/BSD-3-Clause"
+		}
+	],
+	"main": "main.js",
+	"name": "mellorimon",
+	"version": "0.0.1"
+}
