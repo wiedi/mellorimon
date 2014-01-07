@@ -5,7 +5,8 @@ var async = require('async')
 var plugins = [
 	require('./load'),
 	require('./kstat'),
-	require('./ipmitool')
+	require('./ipmitool'),
+	require('./zpool')
 ]
 
 function Mellorimon() {
