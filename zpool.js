@@ -19,47 +19,44 @@ function parse(stdout) {
 	return pools
 }
 
-function fetch(cb) {
-	exec("zpool list -Hpo name,size,allocated,free,capacity", function(err, stdout, stderr) {
-		if(err) {
-			cb(err)
-			return
-		}
-		cb(null, parse(stdout))
+function generate_stats(pools) {
+	var stats = {}
+	pools.forEach(function(pool) {
+		var name = clean_fieldname(pool.name)
+		stats['zpool_' + name] = [
+			"graph_title zpool usage (" + pool.name + ")",
+			"graph_vlabel bytes",
+			"graph_info Space available and used on the zpool",
+			"graph_args --base 1024 --lower-limit 0",
+			"graph_category disk",
+			"allocated.draw AREA",
+			"allocated.label allocated",
+			"allocated.value " + pool.allocated,
+			"free.draw STACK",
+			"free.label free",
+			"free.value " + pool.free,
+			"size.draw LINE1",
+			"size.label size",
+			"size.value " + pool.size,
+			"capacity.graph no",
+			"capacity.label capacity",
+			"capacity.value " + pool.capacity,
+			"capacity.warning 92",
+			"capacity.critical 98"
+		]
 	})
+	return stats
 }
 
 function zpool(cb) {
-	fetch(function(err, pools) {
+	var cmd = "zpool list -Hpo name,size,allocated,free,capacity"
+	exec(cmd, function(err, stdout, stderr) {
 		if(err) {
 			cb(null, {})
 			return
 		}
-		var stats = {}
-		pools.forEach(function(pool) {
-			var name = clean_fieldname(pool.name)
-			stats['zpool_' + name] = [
-				"graph_title zpool usage (" + pool.name + ")",
-				"graph_vlabel bytes",
-				"graph_info Space available and used on the zpool",
-				"graph_args --base 1024 --lower-limit 0",
-				"graph_category disk",
-				"allocated.draw AREA",
-				"allocated.label allocated",
-				"allocated.value " + pool.allocated,
-				"free.draw STACK",
-				"free.label free",
-				"free.value " + pool.free,
-				"size.draw LINE1",
-				"size.label size",
-				"size.value " + pool.size,
-				"capacity.graph no",
-				"capacity.label capacity",
-				"capacity.value " + pool.capacity,
-				"capacity.warning 92",
-				"capacity.critical 98"
-			]
-		})
+		var pools = parse(stdout)
+		var stats = generate_stats(pools)
 		cb(null, stats)
 	})
 }
