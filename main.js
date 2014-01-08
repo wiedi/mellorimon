@@ -6,7 +6,8 @@ var plugins = [
 	require('./load'),
 	require('./kstat'),
 	require('./ipmitool'),
-	require('./zpool')
+	require('./zpool'),
+	require('./mpstat')
 ]
 
 function Mellorimon() {
