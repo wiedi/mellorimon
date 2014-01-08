@@ -22,7 +22,7 @@ function parse(stdout) {
 }
 
 function mpstat(cb) {
-	exec("mpstat 10 2", function(err, stdout, stderr) {
+	exec("mpstat 1 2", function(err, stdout, stderr) {
 		if(err) {
 			cb(null, {})
 			return
@@ -31,7 +31,7 @@ function mpstat(cb) {
 		cb(null, {'mpstat': [
 			"graph_title CPU Utilization",
 			"graph_vlabel %",
-			"graph_info Aggregates percentage each CPU spends on user + system + idel time with mpstat in a 10 second sample set",
+			"graph_info Aggregates percentage each CPU spends on user + system + idel time with mpstat in a 1 second sample set",
 			"graph_args --base 1000 -l 0 -u " + stats.cpus * 100 ,
 			"graph_scale no",
 			"graph_category system",
