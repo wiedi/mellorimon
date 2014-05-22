@@ -8,7 +8,8 @@ var plugins = [
 	require('./ipmitool'),
 	require('./zpool'),
 	require('./mpstat'),
-	require('./mem')
+	require('./mem'),
+	require('./processes')
 ]
 
 function Mellorimon() {
