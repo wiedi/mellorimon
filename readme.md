@@ -28,6 +28,20 @@ The limited scope allowed us to cut some corners that might improve performance 
 
 Currently all this is very experimental.
 The Server works and queries from the munin master seem ok.
-There is a "load" plugin which can be used as an example.
+There are some basic plugins which can be used as an example.
 More plugins are needed for metrics that are relevant from the GZ.
-Deployment is not fully decided yet - but simple copying the files to the GZ or spinning a custom image are both possible.
+
+## Deployment
+
+Included is a small shellscript that will help with deployment.
+
+Download or clone this repository on your admin workstation.
+Then use the <code>deploy.sh</code> to install dependencies and scp the files into your SmartOS host.
+
+	./deploy.sh server.example.com
+
+After that reboot the SmartOS system or issue:
+
+	svccfg import /opt/custom/smf/mellorimon.xml
+
+to start the server.
