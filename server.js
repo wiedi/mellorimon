@@ -45,4 +45,4 @@ var server = net.createServer(function(conn) {
 		}
 	})
 	conn.write('# munin node at ' + os.hostname() + '\n')
-}).listen(4949)
+}).listen(4949, '::')
