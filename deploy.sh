@@ -10,8 +10,8 @@ host=${1}
 
 npm install
 
-ssh $host "rm -rf /opt/mellorimon"
-ssh $host "mkdir  /opt/mellorimon"
+ssh -n $host "rm -rf /opt/mellorimon"
+ssh -n $host "mkdir  /opt/mellorimon"
 scp -r * $host:/opt/mellorimon
-ssh $host "cp /opt/mellorimon/manifest.xml /opt/custom/smf/mellorimon.xml"
+ssh -n $host "cp /opt/mellorimon/manifest.xml /opt/custom/smf/mellorimon.xml"
 
