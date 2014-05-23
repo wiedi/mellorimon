@@ -32,7 +32,7 @@
 		<stability value="Evolving"/>
 		<template>
 			<common_name>
-				<loctext xml:lang="C">doveot auth daemon for core.io</loctext>
+				<loctext xml:lang="C">munin node server</loctext>
 			</common_name>
 		</template>
 
