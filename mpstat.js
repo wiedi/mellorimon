@@ -31,7 +31,7 @@ function mpstat(cb) {
 		cb(null, {'mpstat': [
 			"graph_title CPU Utilization",
 			"graph_vlabel %",
-			"graph_info Aggregates percentage each CPU spends on user + system + idel time with mpstat in a 1 second sample set",
+			"graph_info Aggregates percentage each CPU spends on user + system + idle time with mpstat in a 1 second sample set",
 			"graph_args --base 1000 -l 0 -u " + stats.cpus * 100 ,
 			"graph_scale no",
 			"graph_category system",
@@ -41,7 +41,7 @@ function mpstat(cb) {
 			"sys.label system",
 			"sys.draw STACK",
 			"sys.value " + stats.sys,
-			"idl.label idel",
+			"idl.label idle",
 			"idl.draw STACK",
 			"idl.value " + stats.idl
 		]})
