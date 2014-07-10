@@ -107,7 +107,7 @@ function makeZoneStats(zones, list) {
 
 		if(!(currIface.zonename in zone_stats)) {
 			zone_stats[currIface.zonename] = {
-			"	obytes64": Number(currIface.obytes64),
+				"obytes64": Number(currIface.obytes64),
 				"rbytes64": Number(currIface.rbytes64),
 				"alias": zones[currIface.zonename]
 			}
