@@ -9,7 +9,9 @@ var plugins = [
 	require('./zpool'),
 	require('./mpstat'),
 	require('./mem'),
-	require('./processes')
+	require('./processes'),
+	require('./network'),
+	require('./zones_network')
 ]
 
 function Mellorimon() {
