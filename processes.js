@@ -32,8 +32,8 @@ function Processes(cb) {
 			return
 		}
 		
-		var max	= Number(results.['unix:0:var:v_proc'])
-		var current = Number(results.['unix:0:system_misc:nproc'])
+		var max	= Number(results['unix:0:var:v_proc'])
+		var current = Number(results['unix:0:system_misc:nproc'])
 		var warning = parseInt(max*0.92)
 		var critical = parseInt(max*0.98)
 
