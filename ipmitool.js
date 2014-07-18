@@ -11,6 +11,13 @@ var UNIT_DEFAULTS = {
 		"graph_info IPMI Hardware RPM Numbers",
 		"graph_category sensors"
 	],
+	'percent': [
+		"graph_title IPMI Sensors",
+		"graph_args --base 1000 -l 0 -u 100",
+		"graph_vlabel %",
+		"graph_info IPMI Hardware Percent Numbers",
+		"graph_category sensors"
+	],
 	'degrees c': [
 		"graph_title Temperature",
 		"graph_args --base 1000",
