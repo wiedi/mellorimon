@@ -90,6 +90,15 @@ function format_field(field) {
 	]
 	var warn = field['lower-non-critical'] + ':' + field['upper-non-critical']
 	var crit = field['lower-critical']     + ':' + field['upper-critical']
+
+	/* some iLO2 variants have invalid warning values that can't be changed
+	 * if lower and upper bounds are 0 ignore those
+	 */
+	if(Number(field['lower-non-critical']) == 0 && Number(field['upper-non-critical']) == 0)
+		warn = ':'
+	if(Number(field['lower-critical']) == 0     && Number(field['upper-critical']) == 0)
+		crit = ':'
+
 	if(warn != ':') lines.push(name + ".warning "  + warn)
 	if(crit != ':') lines.push(name + ".critical " + crit)
 	return lines
