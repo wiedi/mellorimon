@@ -1,5 +1,6 @@
 "use strict"
 var exec  = require('child_process').exec
+var split_with_escape = require('./util').split_with_escape
 
 function generate_stats(zone_nic_stats) {
 
@@ -87,7 +88,7 @@ function parseZones(stdout) {
 	var zones = {}
 
 	stdout.trim().split('\n').forEach(function(line) {
-		line = line.match(/(\\.|[^:])+/g)
+		line = split_with_escape(line)
 		if(line.length != 2) return
 		zones[line[0]] = line[1]
 	})
