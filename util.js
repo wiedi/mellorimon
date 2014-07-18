@@ -17,7 +17,7 @@ function split_with_escape(string, char) {
 	string.split(char).forEach(function(e) {
 		var prev = a[a.length - 1]
 		if(prev && prev.substr(-1) == "\\") {
-			a[a.length - 1] = prev.slice(0, -1) + ':' + e
+			a[a.length - 1] = prev.slice(0, -1) + char + e
 		} else {
 			a.push(e)
 		}
