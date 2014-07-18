@@ -98,7 +98,7 @@ function parseZones(stdout) {
 
 function makeZoneStats(zones, list) {
 
-	var	zone_stats = {}
+	var zone_stats = {}
 
 	Object.keys(list).forEach(function(currIfaceKey){
 
@@ -129,13 +129,19 @@ function ZonesNetwork(cb) {
 			cb(null, {})
 			return
 		}
-	  var zones = parseZones(stdout)
+		var zones = parseZones(stdout)
 
-	  linkKstats(function(err, list){
-		var zone_stats = makeZoneStats(zones, list)
-		var munin_stats =  generate_stats(zone_stats)
-		cb(null,munin_stats)
-	  })
+		/* if there are no zones hide the graph */
+		if(Object.keys(zones).length < 1) {
+			cb(null, {})
+			return
+		}
+
+		linkKstats(function(err, list) {
+			var zone_stats = makeZoneStats(zones, list)
+			var munin_stats =  generate_stats(zone_stats)
+			cb(null,munin_stats)
+		})
 	})
 }
 
