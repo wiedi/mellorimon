@@ -6,7 +6,7 @@ function generate_stats(zone_nic_stats) {
 	var zones_network_traffic = [
 		"graph_title traffic stats of all zones",
 		"graph_info incoming and outgoing traffic of all zones",
-		"graph_args --base 1024",
+		"graph_args --base 1000",
 		"graph_category virtualization",
 		"graph_vlabel traffic in (-) / out (+) per ${graph_period} in bps"
 	]

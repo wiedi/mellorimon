@@ -61,7 +61,7 @@ function generate_stats(nictags, cb) {
 
 
 			iface_stats['network_packets_'+nictag.iface] = [
-				"graph_title "+nictag.iface+" packet stats",
+				"graph_title " + nictag.iface + " (" + nictag.name + ") packet stats",
 				"graph_info incoming and outgoing packet counter",
 				"graph_order ipackets opackets ierrors oerrors",
 				"graph_args --base 1000",
@@ -92,7 +92,7 @@ function generate_stats(nictags, cb) {
 			]
 
 			iface_stats['network_traffic_'+nictag.iface] = [
-				"graph_title "+nictag.iface+" traffic stats",
+				"graph_title " + nictag.iface + " (" + nictag.name + ") traffic stats",
 				"graph_info incoming and outgoing traffic",
 				"graph_order rbytes obytes",
 				"graph_args --base 1024",
@@ -128,6 +128,7 @@ function parse(stdout) {
 		line = line.match(/(\\.|[^:])+/g)
 
 		if(line.length != 3) return
+		if(line[2] == '-') return
 		nictags.push({
 			'name': line[0],
 			'mac': line[1],
