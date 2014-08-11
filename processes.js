@@ -40,7 +40,7 @@ function Processes(cb) {
 		cb(null, {'processes': [
 			"graph_title Process number utilization",
 			"graph_info Process number utilization as reported by kstat",
-			"graph_args --base 1000 -l 0",
+			"graph_args --base 1000 -l 1 --logarithmic -units=si",
 			"graph_scale no",
 			"graph_vlabel processes",
 			"graph_category system",

@@ -11,7 +11,8 @@ var plugins = [
 	require('./mem'),
 	require('./processes'),
 	require('./network'),
-	require('./zones_network')
+	require('./zones_network'),
+	require('./zones_cpu')
 ]
 
 function Mellorimon() {
