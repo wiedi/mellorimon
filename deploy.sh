@@ -13,5 +13,6 @@ npm install
 ssh -n $host "rm -rf /opt/mellorimon"
 ssh -n $host "mkdir  /opt/mellorimon"
 scp -r * $host:/opt/mellorimon
+ssh -n $host "mkdir -p /opt/custom/smf/"
 ssh -n $host "cp /opt/mellorimon/manifest.xml /opt/custom/smf/mellorimon.xml"
 
