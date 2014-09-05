@@ -7,7 +7,7 @@ function generate_stats(zone_stats) {
 		"graph_title cpu time stats of all zones",
 		"graph_info cpu time per zone of all zones running (inkl. gz)",
 		"graph_args --base 1000",
-		"graph_category virtualization",
+		"graph_category zones_cpu",
 		"graph_vlabel cpu time used (+) / waitrq (-) per ${graph_period}"
 	]
 
@@ -64,25 +64,15 @@ function cpuKstats(cb) {
 			var keyNames = line[0].split(':')
 			if(keyNames.length != 4) return
 			var zname = keyNames[2]
-
 			if(!(zname in list)) {
 				list[zname] = {}
 			}
-			if(keyNames[3] == "nsec_sys") {
-				list[zname]["nsec_sys"] = line[1]
-			}
-			if(keyNames[3] == "nsec_user") {
-				list[zname]["nsec_user"] = line[1]
-			}
-			if(keyNames[3] == "nsec_waitrq") {
-				list[zname]["nsec_waitrq"] = line[1]
-			}
-			if(keyNames[3] == "zonename") {
-				list[zname]["zonename"] = line[1]
-			}
+			list[zname][keyNames[3]] = line[1]
 		})
-		cb(null, list)
+	cb(null, list)
+
 	})
+
 }
 
 function parseZones(stdout) {
@@ -104,16 +94,16 @@ function makeZoneStats(zones, list) {
 	Object.keys(list).forEach(function(currZoneKey){
 
 		var currZone = list[currZoneKey]
-		var alias = zones[currZone.zonename]
+		var alias = zones[currZone["zonename"]]
 		/*global zone doesn't exist in zones array */
 		if(currZone.zonename == "global"){
 			alias = "global"
 		}
 
 		zone_stats[currZone.zonename] = {
-			"nsec_sys": Number(currZone.nsec_sys),
-			"nsec_user": Number(currZone.nsec_user),
-			"nsec_waitrq": Number(currZone.nsec_waitrq),
+			"nsec_sys": Number(currZone["nsec_sys"]),
+			"nsec_user": Number(currZone["nsec_user"]),
+			"nsec_waitrq": Number(currZone["nsec_waitrq"]),
 			"alias": alias
 		}
 	})
@@ -128,14 +118,14 @@ function ZonesCpu(cb) {
 			cb(null, {})
 			return
 		}
-		var zones = parseZones(stdout)
-		cpuKstats(function(err, list){
-			var zone_stats = makeZoneStats(zones, list)
-			var munin_stats =  generate_stats(zone_stats)
-			cb(null,munin_stats)
-		})
+	  var zones = parseZones(stdout)
+
+	  cpuKstats(function(err, list){
+		var zone_stats = makeZoneStats(zones, list)
+		var munin_stats =  generate_stats(zone_stats)
+		cb(null,munin_stats)
+	  })
 	})
 }
-
 
 module.exports = ZonesCpu
