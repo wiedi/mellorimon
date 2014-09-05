@@ -8,7 +8,7 @@ function generate_stats(zone_nic_stats) {
 		"graph_title traffic stats of all zones",
 		"graph_info incoming and outgoing traffic of all zones",
 		"graph_args --base 1000",
-		"graph_category virtualization",
+		"graph_category zones_network",
 		"graph_vlabel traffic in (-) / out (+) per ${graph_period} in bps"
 	]
 
@@ -16,7 +16,7 @@ function generate_stats(zone_nic_stats) {
 
 		var obytes = zone_nic_stats[currZoneUuid].obytes64
 		var rbytes = zone_nic_stats[currZoneUuid].rbytes64
-		var short_uuid = "u"+currZoneUuid.split('-')[0]
+		var short_uuid = "z"+currZoneUuid.split('-')[0]
 		var alias = zone_nic_stats[currZoneUuid].alias
 		var label = currZoneUuid.split('-')[0] +' ('+ alias +')'
 
