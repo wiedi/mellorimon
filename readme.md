@@ -26,10 +26,10 @@ The limited scope allowed us to cut some corners that might improve performance 
 
 ## Development Status
 
-Currently all this is very experimental.
-The Server works and queries from the munin master seem ok.
-There are some basic plugins which can be used as an example.
-More plugins are needed for metrics that are relevant from the GZ.
+The Server Code has been running in production for some time now and seems to work very well.
+More plugins have been added over time, some of which have received more testing than others.
+Generally everything should just work.
+If you find any bugs or issues please let us know.
 
 ## Deployment
 
