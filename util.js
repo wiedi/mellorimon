@@ -25,5 +25,18 @@ function split_with_escape(string, char) {
 	return a
 }
 
-exports.clean_fieldname = clean_fieldname
+function parse_zones_list(stdout) {
+	var zones = {}
+
+	stdout.trim().split('\n').forEach(function(line) {
+		line = split_with_escape(line)
+		if(line.length != 2) return
+		zones[line[0]] = line[1]
+	})
+
+	return zones
+}
+
+exports.clean_fieldname   = clean_fieldname
+exports.parse_zones_list  = parse_zones_list
 exports.split_with_escape = split_with_escape

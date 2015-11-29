@@ -1,5 +1,6 @@
 "use strict"
 var exec  = require('child_process').exec
+var parse_zones_list = require('./util').parse_zones_list
 
 function generate_stats(zone_stats, total_mem) {
 
@@ -72,17 +73,6 @@ function cpuKstats(cb) {
 
 }
 
-function parseZones(stdout) {
-	var zones = {}
-
-	stdout.trim().split('\n').forEach(function(line) {
-		line = line.match(/(\\.|[^:])+/g)
-		if(line.length != 2) return
-		zones[line[0]] = line[1]
-	})
-
-	return zones
-}
 
 function makeZoneStats(zones, list) {
 
@@ -114,7 +104,7 @@ function ZonesMemory(cb) {
 			cb(null, {})
 			return
 		}
-		var zones = parseZones(stdout)
+		var zones = parse_zones_list(stdout)
 		var cmd = "sysinfo"
 		exec(cmd, function(err, stdout, stderr) {
 			if(err) {

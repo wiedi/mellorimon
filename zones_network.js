@@ -1,6 +1,6 @@
 "use strict"
 var exec  = require('child_process').exec
-var split_with_escape = require('./util').split_with_escape
+var parse_zones_list = require('./util').parse_zones_list
 
 function generate_stats(zone_nic_stats) {
 
@@ -84,18 +84,6 @@ function linkKstats(cb) {
 
 }
 
-function parseZones(stdout) {
-	var zones = {}
-
-	stdout.trim().split('\n').forEach(function(line) {
-		line = split_with_escape(line)
-		if(line.length != 2) return
-		zones[line[0]] = line[1]
-	})
-
-	return zones
-}
-
 function makeZoneStats(zones, list) {
 
 	var zone_stats = {}
@@ -129,7 +117,7 @@ function ZonesNetwork(cb) {
 			cb(null, {})
 			return
 		}
-		var zones = parseZones(stdout)
+		var zones = parse_zones_list(stdout)
 
 		/* if there are no zones hide the graph */
 		if(Object.keys(zones).length < 1) {
