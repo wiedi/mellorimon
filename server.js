@@ -49,5 +49,6 @@ var server = net.createServer(function(conn) {
 		if (err.errno === 'ECONNRESET'){
 			return;
 		}
+		throw( err );
 	});
 }).listen(4949, '::')
