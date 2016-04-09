@@ -10,6 +10,7 @@ setInterval(m.update.bind(m), 5 * 60 * 1000) // schedule update every 5 minutes
 m.update()
 
 var server = net.createServer(function(conn) {
+	conn.on("error", function(err) {})
 	carrier.carry(conn, function parser(line) {
 		var args = line.split(' ')
 		var cmd  = args.shift()
