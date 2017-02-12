@@ -4,7 +4,7 @@ var kstat = require('./util').kstat
 
 
 function Cpu(cb) {
-	kstat(['*:*:*:cpu_nsec_*'],function(err, results) {
+	kstat(['cpu:*:sys:cpu_nsec_*'],function(err, results) {
 		if(err) {
 			cb(null, {})
 			return
