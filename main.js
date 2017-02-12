@@ -3,8 +3,8 @@
 var async = require('async')
 
 var plugins = [
+	require('./arc'),
 	require('./load'),
-	require('./kstat'),
 	require('./ipmitool'),
 	require('./zpool'),
 	require('./mpstat'),

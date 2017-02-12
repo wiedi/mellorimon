@@ -1,4 +1,5 @@
 "use strict"
+var exec  = require('child_process').exec
 
 function clean_fieldname(name) {
 	if(name[0] == '+') {
@@ -37,6 +38,23 @@ function parse_zones_list(stdout) {
 	return zones
 }
 
+function kstat(stats, cb) {
+exec("kstat -p " + stats.join(' '), function(err, stdout, stderr) {
+	if(err) {
+		cb(err)
+		return
+	}
+	var list = {}
+	stdout.split('\n').forEach(function(line) {
+		line = line.trim().split('\t')
+		if(line.length != 2) return
+		list[line[0]] = line[1]
+	})
+	cb(null, list)
+	})
+}
+
 exports.clean_fieldname   = clean_fieldname
 exports.parse_zones_list  = parse_zones_list
 exports.split_with_escape = split_with_escape
+exports.kstat             = kstat

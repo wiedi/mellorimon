@@ -1,25 +1,9 @@
 "use strict"
-var exec  = require('child_process').exec
+
+var kstat = require('./util').kstat
 
 /*kstat -p unix:0:var:v_proc = max number of processes*/
 /*kstat -p unix:0:system_misc:nproc = current number of processes*/
-
-
-function kstat(stats, cb) {
-exec("kstat -p " + stats.join(' '), function(err, stdout, stderr) {
-	if(err) {
-		cb(err)
-		return
-	}
-	var list = {}
-	stdout.split('\n').forEach(function(line) {
-		line = line.trim().split('\t')
-		if(line.length != 2) return
-		list[line[0]] = line[1]
-	})
-	cb(null, list)
-	})
-}
 
 function Processes(cb) {
 
