@@ -4,10 +4,10 @@ var async = require('async')
 
 var plugins = [
 	require('./arc'),
+	require('./cpu'),
 	require('./load'),
 	require('./ipmitool'),
 	require('./zpool'),
-	require('./mpstat'),
 	require('./mem'),
 	require('./processes'),
 	require('./network'),
