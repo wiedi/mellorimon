@@ -127,7 +127,7 @@ function parse(stdout) {
 	stdout.trim().split('\n').forEach(function(line) {
 		line = line.match(/(\\.|[^:])+/g)
 
-		if(line.length != 3) return
+		if(line.length < 3) return
 		if(line[2] == '-') return
 		nictags.push({
 			'name': line[0],
@@ -137,8 +137,6 @@ function parse(stdout) {
 	})
 	return nictags
 }
-
-
 
 
 function Network(cb) {
