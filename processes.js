@@ -24,7 +24,7 @@ function Processes(cb) {
 		cb(null, {'processes': [
 			"graph_title Process number utilization",
 			"graph_info Process number utilization as reported by kstat",
-			"graph_args --base 1000 -l 1 --logarithmic -units=si",
+			"graph_args --base 1000 -l 1 --logarithmic",
 			"graph_scale no",
 			"graph_vlabel processes",
 			"graph_category system",
@@ -32,10 +32,10 @@ function Processes(cb) {
 			"processes.info Number of processes running.",
 			"processes.warning "  + warning,
 			"processes.critical " + critical,
-			"processes.value "	+ current,
+			"processes.value " + current,
 			"maximum.label maximum",
 			"maximum.info Running processes limit on this machine",
-			"maximum.value "	  + max
+			"maximum.value " + max
 		]})
 	})
 }
