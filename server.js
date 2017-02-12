@@ -46,4 +46,10 @@ var server = net.createServer(function(conn) {
 		}
 	})
 	conn.write('# munin node at ' + os.hostname() + '\n')
+	process.once('uncaughtException', function(err){
+		if (err.errno === 'ECONNRESET'){
+			return;
+		}
+		throw( err );
+	});
 }).listen(4949, '::')
