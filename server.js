@@ -6,8 +6,6 @@ var net     = require('net')
 var carrier = require('carrier')
 
 var m = new (require('./main'))()
-setInterval(m.update.bind(m), 5 * 60 * 1000) // schedule update every 5 minutes
-m.update()
 
 var server = net.createServer(function(conn) {
 	conn.on("error", function(err) {})
@@ -20,7 +18,13 @@ var server = net.createServer(function(conn) {
 			conn.write('cap dirtyconfig\n')
 			break
 		case 'list':
-			conn.write(m.list().join(' ') + '\n')
+			m.list(function(err, list) {
+				if(err) {
+					conn.write('\n')
+					return
+				}
+				conn.write(list.join(' ') + '\n')
+			})
 			break
 		case 'nodes':
 			conn.write(os.hostname() + '\n.\n')
@@ -30,13 +34,19 @@ var server = net.createServer(function(conn) {
 				conn.write('# Unknown service\n.\n')
 				break
 			}
-			conn.write(m.config(args[0]).join('\n') + '\n.\n')
+			m.config(args[0], function(err, stat) {
+				if(err) {
+					conn.write('# Error\n.\n')
+					return
+				}
+				conn.write(stat.join('\n') + '\n.\n')
+			})
 			break
 		case 'fetch':
 			conn.write('# this node requires the use of the dirtyconfig protocol extension\n.\n')
 			break
 		case 'version':
-			conn.write('munins node on ' + os.hostname() + ' version: mellorimon-0.1\n')
+			conn.write('munins node on ' + os.hostname() + ' version: mellorimon-0.2\n')
 			break
 		case 'quit':
 			conn.end()

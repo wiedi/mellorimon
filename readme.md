@@ -19,7 +19,7 @@ This reimplementation differs in a few places from the standard munin node:
 - Plugins aren't external executed programms but node.js modules with one function.
 - There is no configuration. Everything is either autodetected or uses (hopefully) sane defaults.
 - It uses the [dirty config](http://munin-monitoring.org/wiki/protocol-dirty-config) protocol extension. This combines the old config+fetch steps in one and often saves executing commands twice. The old behavior is **not** supported. This makes the code simpler in many places.
-- The plugins don't fetch values on each network request. Instead they are queried every 5 minutes (the default munin poll interval) and results cached.
+- The plugins are executed in parallel and values are cached with the assumtion that all values are read.
 
 The limited scope allowed us to cut some corners that might improve performance and reduce code complexity but trade in the flexibility found in the original.
 
