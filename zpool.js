@@ -112,9 +112,7 @@ function zpool(cb) {
 				return
 			}
 			var fs_data = zfs_list_parse(stdout)
-			console.log(stdout, fs_data)
 			stats = generate_zfs_list_stats(fs_data, stats)
-			console.log(stats)
 			cb(null, stats)
 		})
 	})
