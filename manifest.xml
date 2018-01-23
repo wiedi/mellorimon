@@ -16,6 +16,7 @@
 		<method_context working_directory="/opt/mellorimon/">
 			<method_environment>
 				<envvar name='PATH' value='/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/node/bin'/>
+				<envvar name='TMPDIR' value='/tmp'/>
 			</method_environment>
 		</method_context>
 
