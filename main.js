@@ -9,6 +9,7 @@ var plugins = [
 	require('./ipmitool'),
 	require('./zpool'),
 	require('./mem'),
+	require('./swap'),
 	require('./processes'),
 	require('./network'),
 	require('./zones_network'),
