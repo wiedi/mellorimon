@@ -1,6 +1,6 @@
 "use strict"
 var exec  = require('child_process').exec
-var parse_zones_list = require('./util').parse_zones_list
+var parse_zones_list = require('../util').parse_zones_list
 
 function generate_stats(zone_stats) {
 

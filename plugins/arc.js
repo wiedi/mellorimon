@@ -1,6 +1,6 @@
 "use strict"
 var exec  = require('child_process').exec
-var kstat = require('./util').kstat
+var kstat = require('../util').kstat
 
 
 function Arc(cb) {

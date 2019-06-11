@@ -1,7 +1,7 @@
 "use strict"
 
 var exec = require('child_process').exec
-var clean_fieldname = require('./util').clean_fieldname
+var clean_fieldname = require('../util').clean_fieldname
 
 function zpool_parse(stdout) {
 	var pools = []

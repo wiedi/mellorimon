@@ -1,6 +1,6 @@
 "use strict"
 
-var kstat = require('./util').kstat
+var kstat = require('../util').kstat
 
 /*kstat -p unix:0:var:v_proc = max number of processes*/
 /*kstat -p unix:0:system_misc:nproc = current number of processes*/
