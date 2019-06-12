@@ -5,17 +5,18 @@ var async = require('async')
 var plugins = [
 	require('./plugins/arc'),
 	require('./plugins/cpu'),
-	require('./plugins/load'),
 	require('./plugins/ipmitool'),
-	require('./plugins/zpool'),
+	require('./plugins/load'),
 	require('./plugins/mem'),
-	require('./plugins/swap'),
-	require('./plugins/processes'),
 	require('./plugins/network'),
-	require('./plugins/zones_network'),
+	require('./plugins/nvme'),
+	require('./plugins/processes'),
+	require('./plugins/swap'),
 	require('./plugins/zones_cpu'),
-	require('./plugins/zones_memory'),
 	require('./plugins/zones_iops'),
+	require('./plugins/zones_memory'),
+	require('./plugins/zones_network'),
+	require('./plugins/zpool'),
 ]
 
 function Mellorimon() {
